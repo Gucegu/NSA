@@ -38,6 +38,8 @@ h1 {
     height: 160px;
     left: 725px;
 }
+
+
 button{
     position: relative;
     background-color: #F6F5F5;
@@ -53,21 +55,7 @@ button{
     display: flex;
     transition: all 0.5s;
 }
-button[type = submit]{
-    position: relative;
-    background-color: #F6F5F5;
-    color: rgba(0, 0, 0, 0.705);
-    border-radius: 100px;
-    border: none;
-    font-size: 50px;
-    z-index: 2;
-    font-family: "Luckiest Guy", serif;
-    font-weight: 400;
-    font-style: normal;
-    cursor: pointer;
-    display: flex;
-    transition: all 0.5s;
-}
+
 .text{
     margin-top: 5px;
 }
@@ -200,4 +188,51 @@ input::placeholder{
     margin-left: 310px;
     color: #131313;
     font-size: 40px;
+}
+
+.sla{
+    position: relative;
+    z-index: 2;
+    top: -80px;
+    left: 1200px;
+    width: 100px;
+    height: 100px;
+    opacity: 1;
+}
+
+.pinto{
+    top: -80px;
+}
+
+.index{
+    z-index: 3;
+}
+
+.secreto{
+    position: relative;
+    right: 06px;
+    top: -01px;
+}
+
+#index {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    background: white;
+    border: 1px solid #ccc;
+    position: absolute;
+    z-index: 1000;
+    width: 250px;
+    max-height: 200px;
+    overflow-y: auto;
+    display: none; /* Começa escondida */
+}
+
+#index li {
+    padding: 10px;
+    cursor: pointer;
+}
+
+#index li:hover {
+    background: #f0f0f0;
 }

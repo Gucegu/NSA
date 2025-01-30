@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="css/login.css">
 </head>
 <br>
+
     <h1> Bem vindo ao NSA </h1>
     <img class="img2" src="imgs/cps_logo-removebg-preview.png" alt="Logo">
     <img class="img1"
@@ -18,11 +19,12 @@
         <br>
         <br>
         <br>
-        <input type="text" name="escola" placeholder="Código ou nome da Instituição" class="input2">
+        <input type="text" name="escola" id="instituicao" placeholder="Código ou nome da Instituição" class="input2"> 
         <br>
-        <br>
-        <br>
-        <input type="password" name="senha" placeholder="Senha" maxlength="15">
+            <button type="button" class="sla" id="btn-escola"> <img src="imgs/icon_duvi.png" width="100px" class="secreto"> </button> <ul id="lista-escolas"> </ul>
+            <br>
+            
+        <input type="password" class="pinto" name="senha" placeholder="Senha" maxlength="15">
         <br>
         <br>
         <br>
@@ -34,6 +36,58 @@
         <br>
         <br>
 
+        
     </form>
+    <script>
+        function escola() {
+    console.log("A função escola() foi chamada!"); 
+
+fetch('http://localhost:8080/php/conexao.php')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("o erro  ta aq: " + response.status);
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log("Instituições recebidas: ", data); 
+
+            const lista = document.getElementById('lista-escolas');
+            lista.innerHTML = ""; // talvez o erro esteja aq?
+
+            if (data.length === 0) {
+                lista.innerHTML = "<li>Nenhuma instituição encontrada</li>";
+                return;
+            }
+
+            data.forEach(instituicao => {
+                let item = document.createElement('li');
+                item.textContent = instituicao.Nome || "Nome não encontrado";
+
+                item.onclick = function () {
+                    document.getElementById('instituicao').value = instituicao.Nome;
+                    lista.innerHTML = "";
+                };
+                lista.appendChild(item);
+            });
+        })
+        .catch(error => console.error("Erro ao buscar instituições:", error));
+}
+
+        document.getElementById("btn-escola").addEventListener("click", escola);
+
+        document.addEventListener("DOMContentLoaded", function () {
+    let botao = document.getElementById("btn-escola");
+    if (botao) {
+        botao.addEventListener("click", function () {
+            console.log("Botão ta funcionando");
+            escola();
+        });
+    } else {
+        console.error("Botão não ta aq");
+    }
+});
+    </script>
+    
 </body>
 </html>
