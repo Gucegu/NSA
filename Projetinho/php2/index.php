@@ -7,8 +7,8 @@
     
     $hostname = "localhost";
     $bancodedados = "nsa";
-    $usuario = "eu nao vou colocar meu user nem minha senha no github ne";
-    $senha = "Voces viram que o neymar vai jogar no santos dnv?";
+    $usuario = "root";
+    $senha = "";
 
     $mysqli = new mysqli($hostname, $usuario, $senha, $bancodedados);
     if ($mysqli->connect_errno){

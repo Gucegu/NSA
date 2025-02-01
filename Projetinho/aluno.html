@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt - br">
 <head>
@@ -8,23 +9,27 @@
 </head>
 <br>
 
+
     <h1> Bem vindo ao NSA </h1>
     <img class="img2" src="imgs/cps_logo-removebg-preview.png" alt="Logo">
     <img class="img1"
     src=
     "https://bkpsitecpsnew.blob.core.windows.net/uploadsitecps/sites/1/2017/05/15245318650_7b17f3ecc9_z.jpg" alt="Cps no fundo" 
     width="1650" height="980">
-    <form>
-        <input type="text" name="Rm" placeholder="Rm" maxlength="5" class="input1"> 
+    <form action="http://localhost:8080/php/conexao.php" method="POST">
+        <input type="text" name="Rm" placeholder="Rm" for="rm" maxlength="5" class="input1"> 
         <br>
         <br>
         <br>
-        <input type="text" name="escola" id="instituicao" placeholder="Código ou nome da Instituição" class="input2"> 
+        <input type="text" name="escola" id="instituicao" for="inst" placeholder="Código ou nome da Instituição" class="input2"> 
         <br>
-            <button type="button" class="sla" id="btn-escola"> <img src="imgs/icon_duvi.png" width="100px" class="secreto"> </button> <ul id="lista-escolas"> </ul>
             <br>
-            
-        <input type="password" class="pinto" name="senha" placeholder="Senha" maxlength="15">
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+        <input type="password" class="pinto" name="senha" for="sehnaA" placeholder="Senha" maxlength="15">
         <br>
         <br>
         <br>
@@ -39,34 +44,20 @@
         
     </form>
     <script>
-        function escola() {
-    console.log("A função escola() ta normal"); 
-
-fetch('http://localhost:8080/php/conexao.php')
+    function escola() {
+        fetch('http://localhost:8080/php/conexao.php')
         .then(response => {
-            if (!response.ok) {
-                throw new Error("o erro  ta aq: " + response.status);
-            }
             return response.json();
         })
         .then(data => {
-            console.log("Instituições recebidas: ", data); 
-
             const lista = document.getElementById('lista-escolas');
-            lista.innerHTML = ""; // talvez o erro esteja aq?
-
-            if (data.length === 0) {
-                lista.innerHTML = "<li>Nenhuma instituição encontrada</li>";
-                return;
-            }
-
+            lista.innerHTML = " "; 
             data.forEach(instituicao => {
                 let item = document.createElement('li');
-                item.textContent = instituicao.Nome || "Nome não encontrado";
-
+                item.textContent = instituicao.Nome;
                 item.onclick = function () {
                     document.getElementById('instituicao').value = instituicao.Nome;
-                    lista.innerHTML = "";
+                    lista.innerHTML = " ";
                 };
                 lista.appendChild(item);
             });
